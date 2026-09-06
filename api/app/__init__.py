@@ -1,7 +1,23 @@
-from flask import Flask
+from flask import Flask, jsonify
+
 from api.config import Config
+from api.connection import db
+from routes.post import posts_bp
 
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
+
+    db.init_app(app)
+
+    app.register_blueprint(posts_bp, url_prefix="/api")
+
+    with app.app_context():
+        db.create_all()
+
+    @app.route("/")
+    def index():
+        return jsonify({"message": "Post CRUD API is running"})
+
+    return app
