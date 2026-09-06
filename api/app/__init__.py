@@ -1,8 +1,8 @@
 from flask import Flask, jsonify
 
-from api.config import Config
-from api.connection import db
-from routes.post import posts_bp
+from config import Config
+from connection import db
+from .routes import posts_bp
 
 
 def create_app():

@@ -1,8 +1,8 @@
 from datetime import datetime
-from .extensions import db
+from connection import db
 
 
-class Post(db.Model):
+class PostModel(db.Model):
     __tablename__ = "posts"
 
     id = db.Column(db.Integer, primary_key=True)
